@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Pricing Section</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <div class="container mx-auto p-6">
+        <!-- Light/Dark Mode Toggle -->
+        <div class="flex justify-end mb-4">
+            <button id="theme-toggle" class="bg-gray-200 dark:bg-gray-700 p-2 rounded focus:outline-none">
+                Toggle Light/Dark Mode
+            </button>
+        </div>
+
+        <!-- Billing Option Toggle -->
+        <div class="text-center mb-6">
+            <label class="inline-flex items-center cursor-pointer">
+                <span class="mr-2 text-lg">Monthly</span>
+                <input type="checkbox" id="billing-toggle" class="hidden">
+                <span class="relative">
+                    <span class="block w-10 h-6 bg-gray-400 rounded-full shadow-inner"></span>
+                    <span class="dot absolute w-4 h-4 bg-white rounded-full shadow transform -translate-x-1 -translate-y-1 transition"></span>
+                </span>
+                <span class="ml-2 text-lg">Yearly</span>
+            </label>
+        </div>
+
+        <!-- Pricing Section -->
+        <section class="text-center">
+            <h2 class="text-4xl font-bold mb-6">Our Pricing</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Basic Plan -->
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4">Basic</h3>
+                    <p class="text-3xl font-bold mb-4" id="basic-price">$19/mo</p>
+                    <ul class="mb-6">
+                        <li class="mb-2">Feature 1</li>
+                        <li class="mb-2">Feature 2</li>
+                        <li class="mb-2">Feature 3</li>
+                    </ul>
+                    <button class="bg-blue-500 text-white py-2 px-4 rounded">Choose Plan</button>
+                </div>
+                <!-- Pro Plan -->
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4">Pro</h3>
+                    <p class="text-3xl font-bold mb-4" id="pro-price">$49/mo</p>
+                    <ul class="mb-6">
+                        <li class="mb-2">Feature 1</li>
+                        <li class="mb-2">Feature 2</li>
+                        <li class="mb-2">Feature 3</li>
+                    </ul>
+                    <button class="bg-blue-500 text-white py-2 px-4 rounded">Choose Plan</button>
+                </div>
+                <!-- Premium Plan -->
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4">Premium</h3>
+                    <p class="text-3xl font-bold mb-4" id="premium-price">$99/mo</p>
+                    <ul class="mb-6">
+                        <li class="mb-2">Feature 1</li>
+                        <li class="mb-2">Feature 2</li>
+                        <li class="mb-2">Feature 3</li>
+                    </ul>
+                    <button class="bg-blue-500 text-white py-2 px-4 rounded">Choose Plan</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Light/Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark');
+            }
+        });
+
+        // Billing Toggle Interactivity
+        const billingToggle = document.getElementById('billing-toggle');
+        const basicPrice = document.getElementById('basic-price');
+        const proPrice = document.getElementById('pro-price');
+        const premiumPrice = document.getElementById('premium-price');
+
+        billingToggle.addEventListener('change', () => {
+            if (billingToggle.checked) {
+                // Yearly prices
+                basicPrice.textContent = '$190/yr';
+                proPrice.textContent = '$490/yr';
+                premiumPrice.textContent = '$990/yr';
+            } else {
+                // Monthly prices
+                basicPrice.textContent = '$19/mo';
+                proPrice.textContent = '$49/mo';
+                premiumPrice.textContent = '$99/mo';
+            }
+        });
+    </script>
+</body>
+</html>
